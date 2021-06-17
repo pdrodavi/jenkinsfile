@@ -1,34 +1,48 @@
 pipeline {
-  agent any
-  
+  agent none // agent can only be overwritten if the initial value is 'none'
   stages {
-  
-    stage('Select branch') {
+
+    stage('Stage 1') {
+      agent any
       steps {
         script {
-          BRANCH= input message: 'Your Branch', parameters: [
-                                "main"
-                            ]
+          echo 'This stage is blocking the executor because of the "agent any"'
         }
       }
     }
-        
-    stage('Cloning Git') {
+
+    stage('Stage 2') {
+      agent none
       steps {
-        git branch: BRANCH, url: 'https://github.com/pdrodavi/pipeline-node.git'
+        timeout(time: 1, unit: 'MINUTES') {
+          script {
+            echo 'This stage does not block an executor because of "agent none"'
+            milestone 1
+            inputResponse = input([
+              message           : 'Please confirm.',
+              submitterParameter: 'submitter',
+              parameters        : [
+                [$class: 'BooleanParameterDefinition', defaultValue: true, name: 'param1', description: 'description1'],
+                [$class: 'ChoiceParameterDefinition', choices: 'choice1\nchoice2', name: 'param2', description: 'description2']
+              ]
+            ])
+            milestone 2
+            echo "Input response: ${inputResponse}"
+          }
+        }
       }
     }
-        
-    stage('Install dependencies') {
+
+    stage('Stage 3') {
+      agent any
       steps {
-        echo "Install"
+        script {
+          echo 'This stage is blocking the executor because of the "agent any"'
+          sh 'sleep 15'
+        }
       }
     }
-     
-    stage('Test') {
-      steps {
-         echo "Test"
-      }
-    }      
+
+
   }
 }
