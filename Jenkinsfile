@@ -6,7 +6,9 @@ pipeline {
     stage('Select branch') {
       steps {
         script {
-          BRANCH= input message: 'Your Branch'
+          BRANCH= input message: 'Your Branch', parameters: [
+                                "main"
+                            ]
         }
       }
     }
