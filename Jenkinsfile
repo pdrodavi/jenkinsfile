@@ -25,7 +25,7 @@ pipeline {
               ]
             ])
             milestone 2
-            git branch: inputResponse, url: 'https://github.com/pdrodavi/pipeline-node.git'
+            git "-b ${inputResponse} https://github.com/pdrodavi/pipeline-node.git"
             echo "Input response: ${inputResponse}"
           }
         }
