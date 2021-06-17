@@ -25,10 +25,15 @@ pipeline {
               ]
             ])
             milestone 2
-            git "-b ${inputResponse} https://github.com/pdrodavi/pipeline-node.git"
             echo "Input response: ${inputResponse}"
           }
         }
+      }
+    }
+    
+    stage('Git Checkout') {
+      steps {
+          git(branch: "${inputResponse}", url: "https://github.com/pdrodavi/pipeline-node.git")
       }
     }
 
