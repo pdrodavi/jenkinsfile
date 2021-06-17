@@ -20,9 +20,8 @@ pipeline {
             milestone 1
             inputResponse = input([
               message           : 'Your branch',
-              submitterParameter: 'submitter',
               parameters        : [
-               string(defaultValue: 'None', description: 'Path of config file', name: 'Config')
+               string(name: 'master')
               ]
             ])
             milestone 2
