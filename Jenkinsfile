@@ -21,11 +21,12 @@ pipeline {
             inputResponse = input([
               message           : 'Your branch',
               parameters        : [
-               string(name: 'master')
+               string(name: 'Select branch')
               ]
             ])
             milestone 2
             echo "Input response: ${inputResponse}"
+            git branch: inputResponse, url: 'https://github.com/pdrodavi/pipeline-node.git'
           }
         }
       }
