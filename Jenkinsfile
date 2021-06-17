@@ -22,7 +22,7 @@ pipeline {
               message           : 'Your branch',
               submitterParameter: 'submitter',
               parameters        : [
-                [$class: 'ChoiceParameterDefinition', choices: 'choice1\nchoice2', name: 'param2', description: 'description2']
+               string(defaultValue: 'None', description: 'Path of config file', name: 'Config')
               ]
             ])
             milestone 2
