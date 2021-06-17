@@ -28,15 +28,12 @@ pipeline {
             echo "Input response: ${inputResponse}"
           }
         }
-      }
-    }
-    
-    stage('Git Checkout') {
-      steps {
+      },
+        steps {
           git(branch: "${inputResponse}", url: "https://github.com/pdrodavi/pipeline-node.git")
       }
     }
-
+ 
     stage('Stage 3') {
       agent any
       steps {
