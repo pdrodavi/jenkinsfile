@@ -36,7 +36,7 @@ pipeline {
       steps {
         script {
           git(branch: "${inputResponse}", url: "https://github.com/pdrodavi/pipeline-node.git")
-          echo 'This stage is blocking the executor because of the "agent any"'
+          echo "Branch selected: ${inputResponse}"
         }
       }
     }
