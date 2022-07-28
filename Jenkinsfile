@@ -2,7 +2,7 @@ pipeline {
   agent none // agent can only be overwritten if the initial value is 'none'
   stages {
 
-    stage('Stage 1') {
+    stage('Checkout') {
       agent any
       steps {
         script {
@@ -11,7 +11,7 @@ pipeline {
       }
     }
 
-    stage('Stage 2') {
+    stage('Choose Branch') {
       agent none
       steps {
         timeout(time: 5, unit: 'MINUTES') {
@@ -31,7 +31,7 @@ pipeline {
       }
     }
  
-    stage('Stage 3') {
+    stage('Build') {
       agent any
       steps {
         script {
